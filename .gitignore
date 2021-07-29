@@ -4,3 +4,4 @@ Herramientas
 *.sql
 upload
 uploads
+.env
