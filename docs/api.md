@@ -1,6 +1,6 @@
 # Uso de la API
 
-Deberá crear un archivo denomado `.env` para colocar en él la `API_KEY`. El archivo debe ser creado fuera del directorio raíz del proyecto.
+Deberá crear un archivo denominado `.env` para colocar en él la `API_KEY`. El archivo debe ser creado fuera del directorio raíz del proyecto.
 
 Es decir, se tiene la siguiente estructura:
 
