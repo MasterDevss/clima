@@ -17,6 +17,24 @@ Por ejemplo:
 API_KEY = su api key acá sin comillas
 ```
 
+Si no emplea ningún criterio de búsqueda le devolverá los datos por defecto de la región desde cual realiza la consulta.
+
+Por ejemplo:
+
+```none
+api/
+```
+
+Por lo tanto, si la llamamos desde JavaScript sería así:
+
+```javascript
+fetch(`api/`).
+    then(respuesta => respuesta.json())
+    then(data => {
+        console.log( data );
+    });
+```
+
 Una vez hecho el paso anterior puede consultar por:
 
 - Nombre de ciudad.
