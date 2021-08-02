@@ -35,7 +35,7 @@ fetch(`api/`).
     });
 ```
 
-Una vez hecho el paso anterior puede consultar por:
+También puede emplear algunos de los siguientes criterio de búsqueda:
 
 - Nombre de ciudad.
 - Por ID de ciudad.
