@@ -1,6 +1,7 @@
 <?php
 header("content-type: application/json; charset=utf-8");
 
+include __DIR__ . "/Datos.php";
 include __DIR__ . "/DLConectar.php";
 include __DIR__ . "/DLProtocolo.php";
 include __DIR__ . "/DLPeticiones.php";
@@ -9,30 +10,7 @@ $conectar = new DLConectar(__DIR__ . "/../../.env");
 $get = new DLPeticiones("get");
 
 $apiKey = $conectar->obtenerAPI();
-
-function obtenerDatos( string $url ) {
-    $headers = @get_headers( $url );
-    $datos = [
-        "info" => "Introduzca un criterio de búsqueda válido"
-    ];
-
-    if ( empty($headers) ) {
-        return json_encode($datos);
-    }
-
-    list($codigo) = $headers;
-
-    $datos = [
-        "info" => "No hay resultados que mostrar"
-    ];
-
-    return $codigo == "HTTP/1.1 200 OK" ? file_get_contents($url ) : json_encode($datos);
-}
-
-function obtenerIP() {
-    return (string) isset($_SERVER['REMOTE_ADDR']) || !empty($_SERVER['REMOTE_ADDR'])
-        ? $_SERVER['REMOTE_ADDR'] : "";
-}
+$datos = new Datos;
 
 $content = (object) [
     "ciencia" => "Ciencia de datos", 
@@ -44,7 +22,7 @@ $content = (object) [
 if ( $get->modulo("ciudad") ) {
     $ciudad = $get->value("ciudad");
     $ruta = "https://api.openweathermap.org/data/2.5/weather?q=$ciudad&appid=$apiKey&units=metric&lang=ES";
-    echo obtenerDatos($ruta);
+    echo $datos->obtener($ruta);
     exit;
 }
 
@@ -52,7 +30,7 @@ if ( $get->modulo("ciudad") ) {
 if ( $get->modulo("id") ) {
     $id = $get->value("id");
     $ruta = "https://api.openweathermap.org/data/2.5/weather?id=$id&appid=$apiKey&units=metric&lang=ES";
-    echo obtenerDatos($ruta);
+    echo $datos->obtener($ruta);
     exit;
 }
 
@@ -60,7 +38,7 @@ if ( $get->modulo("id") ) {
 if ( $get->modulo("coordenadas") ) {
     list($latitud, $longitud) = preg_split("/[,]{1,}/", $get->value("coordenadas"));
     $ruta = "https://api.openweathermap.org/data/2.5/weather?lat=$latitud&lon=$longitud&appid=$apiKey&units=metric&lang=ES";
-    echo obtenerDatos($ruta);
+    echo $datos->obtener($ruta);
     exit;
 }
 
@@ -68,58 +46,29 @@ if ( $get->modulo("coordenadas") ) {
 if ( $get->modulo("postal") ) {
     $postal = $get->value("postal");
     $ruta = "https://api.openweathermap.org/data/2.5/weather?zip=$postal&appid=$apiKey&units=metric&lang=ES";
-    echo obtenerDatos($ruta);
+    echo $datos->obtener($ruta);
     exit;
 }
-
-$datos = [
-    "info" => "Puede llamar a la API de Current Weather Data"
-];
 
 $paramCount = count($_GET);
 
 if ( ! ($paramCount > 0) ) {
-    $url = "http://ip-api.com/json/";
-    $host = (string) $_SERVER['HTTP_HOST'];
-    $ip = (string) obtenerIP();
-
-    list($a, $b, $c, $d) = !empty(trim($ip)) ? preg_split("/\./", $ip) : [
-        127, 0, 0, 1
-    ];
-
-
-    $servidor = $_SERVER;
-    $a = (int) $a;
-    $b = (int) $b;
-    $c = (int) $c;
-    $d = (int) $d;
-
+    $datos = new Datos;
     
-    // Si las direcciones IP son privadas:
-    if (
-        ( $a == 10 && (($b >= 0 && $b <= 255) && ($c >= 0 && $c <= 255) && ($d >= 0 && $d <= 255)) ) ||
-        ( $a == 172 && (($b >= 16 && $b <= 31) && ($c >= 0 && $c <= 255) && ($d >= 0 && $d <= 255)) ) ||
-        ( $a == 192 && (($b == 168) && ($c >= 0 && $c <= 255) && ($d >= 0 && $d <= 255)) ) ||
-        ( $a == 127 && $b == 0 && ($c == 0 || $c == 1) && ($d == 1) )
-    ) {
-        $ipInfo = json_decode(obtenerDatos($url));
-        $lat = @$ipInfo->lat;
-        $lon = @$ipInfo->lon;
-
-        $urlClima = "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric&lang=ES";
-        $clima = array_merge((array) $ipInfo, (array) json_decode(obtenerDatos($urlClima)));
-        echo json_encode($clima);
-        exit;
+    $url = "http://ip-api.com/json/";
+    $ip = (string) $datos->obtenerIP();
+    
+    if (!$datos->is_ip_publica($ip) || preg_match("/^\:\:|127/", $ip) ) {
+        $ip = "";
     }
 
-    // Si la dirección IP es pública:
     $url .= $ip;
-    $ipInfo = json_decode(obtenerDatos($url));
+    $ipInfo = json_decode($datos->obtener($url));
     $lat = @$ipInfo->lat;
     $lon = @$ipInfo->lon;
 
     $urlClima = "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric&lang=ES";
-    $clima = array_merge((array) $ipInfo, (array) json_decode(obtenerDatos($urlClima)));
+    $clima = array_merge((array) $ipInfo, (array) json_decode($datos->obtener($urlClima)));
     echo json_encode($clima);
     exit;
 }
