@@ -53,7 +53,7 @@ class Datos {
                     $clima = $datos["weather"];
 
                     foreach ($clima as $key => $value) {
-                        $value["icono"] = $this->obtenerIcono($value["icon"]);
+                        $value["iconos"] = $this->obtenerIcono($value["icon"]);
                         $clima[$key] = $value;
                     }
 

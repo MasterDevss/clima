@@ -265,7 +265,7 @@ A estas otras:
       "main": "Clear",
       "description": "cielo claro",
       "icon": "01d",
-      "icono": {
+      "iconos": {
         "iconD": "https://openweathermap.org/img/wn/01d@2x.png",
         "iconN": "https://openweathermap.org/img/wn/01n@2x.png"
       }
