@@ -2,13 +2,23 @@
 class Datos {
     protected $tipo = "application\/json";
     protected $content_type = "content\-type";
-
     public function __construct() {}
 
     private function contiene(string $pattern, string $string) {
         $pattern = (string) $pattern;
         $string = (string) $string;
         return preg_match("/$pattern/i", $string);
+    }
+
+    private function obtenerIcono( string $icon ) {
+        $iconD = (string) $icon;
+        $iconN = (string) preg_replace("/[d]/i", "n", $icon);
+
+
+        return [
+            "iconD" => "https://openweathermap.org/img/wn/$iconD@2x.png",
+            "iconN" => "https://openweathermap.org/img/wn/$iconN@2x.png",
+        ];
     }
 
     public function obtener( string $url ) {
@@ -33,9 +43,25 @@ class Datos {
 
                 list($codigo) = $headers;
 
-                return $this->contiene("200 OK", $codigo) ? file_get_contents($url) : json_encode([
+                $datos =  $this->contiene("200 OK", $codigo) ? json_decode(file_get_contents($url), true) : [
                     "info" => "No se pudieron obtener los datos del servidor"
-                ]);
+                ];
+
+                $datos = (array) $datos;
+
+                if (isset($datos["weather"])) {
+                    $clima = $datos["weather"];
+
+                    foreach ($clima as $key => $value) {
+                        $value["icono"] = $this->obtenerIcono($value["icon"]);
+                        $clima[$key] = $value;
+                    }
+
+                    $datos["weather"] = $clima;
+                }
+
+                $datos = json_encode($datos);
+                return $datos;
             }
         }
 
