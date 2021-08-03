@@ -29,6 +29,11 @@ function obtenerDatos( string $url ) {
     return $codigo == "HTTP/1.1 200 OK" ? file_get_contents($url ) : json_encode($datos);
 }
 
+function obtenerIP() {
+    return (string) isset($_SERVER['REMOTE_ADDR']) || !empty($_SERVER['REMOTE_ADDR'])
+        ? $_SERVER['REMOTE_ADDR'] : "";
+}
+
 $content = (object) [
     "ciencia" => "Ciencia de datos", 
     "apiKey" => $apiKey,
@@ -76,9 +81,12 @@ $paramCount = count($_GET);
 if ( ! ($paramCount > 0) ) {
     $url = "http://ip-api.com/json/";
     $host = (string) $_SERVER['HTTP_HOST'];
-    $ip = (string) $_SERVER['REMOTE_ADDR'];
+    $ip = (string) obtenerIP();
 
-    list($a, $b, $c, $d) = preg_split("/\./", $ip);
+    list($a, $b, $c, $d) = !empty(trim($ip)) ? preg_split("/\./", $ip) : [
+        127, 0, 0, 1
+    ];
+
 
     $servidor = $_SERVER;
     $a = (int) $a;
