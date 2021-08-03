@@ -21,6 +21,7 @@ function obtenerDatos( string $url ) {
     }
 
     list($codigo) = $headers;
+
     $datos = [
         "info" => "No hay resultados que mostrar"
     ];
@@ -93,7 +94,7 @@ if ( ! ($paramCount > 0) ) {
         ( $a == 192 && (($b == 168) && ($c >= 0 && $c <= 255) && ($d >= 0 && $d <= 255)) ) ||
         ( $a == 127 && $b == 0 && ($c == 0 || $c == 1) && ($d == 1) )
     ) {
-        $ipInfo = json_decode(file_get_contents($url));
+        $ipInfo = json_decode(obtenerDatos($url));
         $lat = @$ipInfo->lat;
         $lon = @$ipInfo->lon;
 
@@ -105,7 +106,7 @@ if ( ! ($paramCount > 0) ) {
 
     // Si la dirección IP es pública:
     $url .= $ip;
-    $ipInfo = json_decode(file_get_contents($url));
+    $ipInfo = json_decode(obtenerDatos($url));
     $lat = @$ipInfo->lat;
     $lon = @$ipInfo->lon;
 
