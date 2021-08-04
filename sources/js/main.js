@@ -5,6 +5,7 @@ const ruta = "api/";
 fetch( ruta )
 .then(respuesta => respuesta.json())
 .then(data => {
-    console.clear();
-    console.log( data );
-});
+    if(data.info && data.tipo) {
+        console.log("Error ocurrido al detectar la ubicacion")
+    }
+})
