@@ -78,6 +78,9 @@ if ( ! ($paramCount > 0) ) {
     $host = (string) $_SERVER['HTTP_HOST'];
     $ip = (string) $_SERVER['REMOTE_ADDR'];
 
+    echo json_encode($_SERVER);
+    exit;
+
     list($a, $b, $c, $d) = preg_split("/\./", $ip);
 
     $servidor = $_SERVER;
