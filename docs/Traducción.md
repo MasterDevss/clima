@@ -217,4 +217,62 @@ api.openweathermap.org/data/2.5/find?lat=55.5&lon=37.5&cnt=10&appid={API key}
 
 [Visite la fuente para leer la documentación original][fuente]
 
-[fuente]:https://openweathermap.org/current "Visite la fuente para obtener documentación original | Open Weather Map"
+[fuente]: https://openweathermap.org/current "Visite la fuente para obtener documentación original | Open Weather Map"
+
+---
+
+### Importante
+
+Los iconos se pueden obtener mediante la siguiente URL:
+
+```none
+https://openweathermap.org/img/wn/10d@2x.png
+```
+
+Por lo tanto, en JavaScript podría hacer lo siguiente:
+
+```js
+const icono = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+```
+
+Sin embargo, se agregarán las rutas de las imágenes relacionadas al clima de la cliudad consultada. Por lo tanto, pasaría de las siguientes líneas:
+
+```json
+{
+  ...
+
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "cielo claro",
+      "icon": "01d"
+    }
+  ],
+  ...
+}
+```
+
+A estas otras:
+
+```json
+{
+  ...
+
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "cielo claro",
+      "icon": "01d",
+      "iconos": {
+        "iconD": "https://openweathermap.org/img/wn/01d@2x.png",
+        "iconN": "https://openweathermap.org/img/wn/01n@2x.png"
+      }
+    }
+  ],
+  ...
+}
+```
+
+Por lo tanto, se tiene ahora la representación gráfica del clima diurno y nocturno.
