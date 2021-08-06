@@ -1,11 +1,11 @@
-const probar = document.querySelector("#probar");
+const getData = async ()=> {
+    const request = await fetch("api/");
+    const data = await request.json();
+    if(data.info == "La URL introducida no es válida") return "No se pudo detectar tu ubicacion"
+    else return data
+}
 
-const ruta = "api/";
+let clima = await getData();
+console.log(clima);
 
-fetch( ruta )
-.then(respuesta => respuesta.json())
-.then(data => {
-    if(data.info && data.tipo) {
-        console.log("Error ocurrido al detectar la ubicacion")
-    }
-})
+
