@@ -30,10 +30,60 @@
 </head>
 
 <body>
-  <main id="app">
-    <section class="main__container">
+  <header class="header" id="header">
+      <nav class="nav">
+        <section class="nav__menu-container">
+          <ul class="nav__ul">
+            <li class="nav__element">Inicio</li>
+            <li class="nav__element">Clima Avanzado</li>
+            <li class="nav__element">Busqueda Personalizada</li>
+            <li class="nav__element">Contacta Con Nosotros</li>
+          </ul>
+        </section>
+    </nav>
+
+    <section class="header__date-container">
+      <article class="header__day-container">
+        <p class="header__day">Sunday</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
+      </article>
+      <article class="header__date-container"> <!--Esta zona quisas sea mejor usar el objeto Date de javaScript-->
+        <p class="header__date-day">12</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
+        <p class="header__date-month">September</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
+        <p class="header__date-year">2050</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
+      </article>
+    </section>
+
+    <section class="header__identity-container"> <!--Revisar si usaremos una imagen o un solo el nombre-->
+      <article class="header__logo-container">
+        <img src="" alt="" class="header__logo">
+      </article>
+      <article class="header__name-container">
+        <h1 class="header__name">Helios App</h1>
+      </article>
+    </section>
+  </header>
+  
+  <main id="app" class="main">
+    <section class="main__weather-container">
+
+     <section class="main__data-temp-container">
+      <article class="main__temp-container">
+        <h2 class="main__temp">25<span>°</span></h2>
+      </article>
+      <article class="main__weather-container">
+        <h2 class="main__weather">Cloudy</h2>
+      </article>
+      <article class="main__wind-container">
+        <p class="main__humidity">Humidity<br/>60 %</p>
+        <p class="main__wind">Wind<br/>12 K/M</p>
+      </article>
+     </section>
 
     </section> 
+
+    <section class="main__city-name-container">
+      <h2 class="main__city-name">Tokio</h2>
+    </section>
   </main>
   <!-- Se utiliza el atributo type="module" para 
         modular el código JavaScript -->
