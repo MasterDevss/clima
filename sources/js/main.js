@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Weather } from "./weather_request.js";
 import { DateInfo } from "./date_info.js";
 
@@ -31,6 +32,29 @@ updateWeatherInfo(); // Se llama a la funcion para que muestre por primera ves l
 const interval = setInterval(updateWeatherInfo, 1800000);
 
 
+=======
+"use strict";
+
+// Geolocalizacion por el fronted
+
+// const position = navigator.geolocation;
+
+// const getPosition = (pos)=> {
+//     let coordenadas = `${pos.coords.latitude},${pos.coords.longitude}`;
+//     fetch(`api/?coordenadas=${coordenadas}`)
+//     .then(respuesta => respuesta.json())
+//     .then(data => {
+//         console.log( data );
+//     });
+// }
+// const getErrorPosition = ()=> {
+//     return "Error ocurrido"
+// }
+
+// position.getCurrentPosition(getPosition,getErrorPosition);
+
+// Obtener datos por el codigo postal de la ciudad 
+>>>>>>> ae13935bc4df0e205526be2ccba88726bb354528
 
 
 
