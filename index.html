@@ -1,94 +1,67 @@
 <!DOCTYPE html>
 <html lang="es-ES" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clima</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clima</title>
+    <!-- Protocolo OpenGraph -->
+    <meta property="og:title" content="Clima" />
+    <meta property="og:type" content="website" />
 
-  <!-- Protocolo OpenGraph -->
-  <meta property="og:title" content="Clima">
-  <meta property="og:type" content="website">
-
-  <!--
+    <!--
   <meta property="og:url" content="https://ejemplo.com/">
   <meta property="og:image" content="https://ejemplo.com/imagen.jpeg" />
   <meta property="og:video" content="https://example.com/video" />
   -->
 
-  <!-- Favicon -->
-  <!-- <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+    <!-- Favicon -->
+    <!-- <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
   <link type="image/png" href="favicon.png" rel="icon"> -->
 
-  <!-- Fuentes tipográficas -->
-  <!-- <link
+    <!-- Fuentes tipográficas -->
+    <!-- <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
     rel="stylesheet"> -->
 
-  <!-- Estilos -->
-  <link href="styles/css/style.css" rel="stylesheet">
-</head>
+    <!-- Estilos -->
+    <link href="styles/css/style.css" rel="stylesheet" />
+  </head>
 
-<body>
-  <header class="header" id="header">
-      <nav class="nav">
-        <section class="nav__menu-container">
-          <ul class="nav__ul">
-            <li class="nav__element">Inicio</li>
-            <li class="nav__element">Clima Avanzado</li>
-            <li class="nav__element">Busqueda Personalizada</li>
-            <li class="nav__element">Contacta Con Nosotros</li>
-          </ul>
+  <body>
+    <header class="header">
+      <nav class="nav header__nav">
+        <section class="nav__section">
+          <a href="#" class="nav__logo" title="Acá se va a hacer clic para regresar a la página principal">
+            <img src="" alt="Logo">
+          </a>
+  
+          <label class="menu">Menú</label>
         </section>
-    </nav>
+      </nav>
 
-    <section class="header__date-container">
-      <article class="header__day-container">
-        <p class="header__day">Sunday</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
-      </article>
-      <article class="header__date-container"> <!--Esta zona quisas sea mejor usar el objeto Date de javaScript-->
-        <p class="header__date-day">12</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
-        <p class="header__date-month">September</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
-        <p class="header__date-year">2050</p> <!--Informacion base para maquetar sera cambiada con JavaScript-->
-      </article>
-    </section>
+      <div class="banner">
+        <p>En esta zona va un <i>banner</i></p>
+      </div>
+    </header>
 
-    <section class="header__identity-container"> <!--Revisar si usaremos una imagen o un solo el nombre-->
-      <article class="header__logo-container">
-        <img src="" alt="" class="header__logo">
-      </article>
-      <article class="header__name-container">
-        <h1 class="header__name">Helios App</h1>
-      </article>
-    </section>
-  </header>
-  
-  <main id="app" class="main">
-    <section class="main__weather-container">
+    <main class="main">
+      <h1>Interfaz provisional</h1>
+      <p>Este interfaz gráfica es provisional mientras se termina de analizar su diseño final</p>
 
-     <section class="main__data-temp-container">
-      <article class="main__temp-container">
-        <h2 ><span class="main__temp">-|-</span>°</h2>
-      </article>
-      <article class="main__weather-container">
-        <h2 class="main__weather">-|-</h2>
-      </article>
-      <article class="main__wind-container">
-        <p>Humidity<br/><span class="main__humidity">-|-</span>%</p>
-        <p >Wind<br/><span class="main__wind">-|-</span> K/M</p>
-      </article>
-     </section>
+      <hr>
 
-    </section> 
-
-    <section class="main__city-name-container">
-      <h2 class="main__city-name">-|-</h2>
-    </section>
-  </main>
-  <!-- Se utiliza el atributo type="module" para 
+      <h2>Tomar en cuenta</h2>
+      Esto puede estar dividido en varias secciones y 
+    </main>
+    <!-- Se utiliza el atributo type="module" para 
         modular el código JavaScript -->
-  
-  <script src="sources/js/main.js" type="module"></script>
-</body>
 
+    <footer class="footer">
+      <section class="footer__inner">
+        Información de la página
+      </section>
+    </footer>
+    <script src="sources/js/main.js" type="module"></script>
+  </body>
 </html>
